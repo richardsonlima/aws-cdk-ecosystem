@@ -4,7 +4,7 @@ import * as ec2 from "@aws-cdk/aws-ec2";
 import * as ecs_patterns from "@aws-cdk/aws-ecs-patterns";
 import { Cluster, FargateTaskDefinition, TaskDefinition } from '@aws-cdk/aws-ecs';
 import { clearScreenDown } from 'readline';
-
+import {} from './shared-Infra';
 
 export class EcsFargateStack extends cdk.Stack {
 
@@ -27,7 +27,7 @@ export class EcsFargateStack extends cdk.Stack {
         let vpc = ec2.Vpc.fromVpcAttributes(this, 'VPC', {
             // Reference: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference.html
             // The intrinsic function Fn::ImportValue returns the value of an output exported by another stack. 
-            vpcId: cdk.Fn.importValue('a001021010'),
+            vpcId: cdk.Fn.importValue('ExportedVpcId'),
             availabilityZones: cdk.Fn.split(',', cdk.Fn.importValue('a001021010')),
             publicSubnetIds: cdk.Fn.split(',', cdk.Fn.importValue('a001021010')),
             privateSubnetIds: cdk.Fn.split(',', cdk.Fn.importValue('a001021010')),
